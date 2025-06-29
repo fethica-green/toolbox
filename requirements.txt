@@ -3,3 +3,7 @@ pandas
 xlsxwriter
 openpyxl
 python-dateutil
+streamlit
+pandas
+fpdf
+python-docx
