@@ -7,3 +7,4 @@ streamlit
 pandas
 fpdf
 python-docx
+streamlit-aggrid
