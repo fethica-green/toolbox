@@ -1,0 +1,81 @@
+/* assets/style.css */
+
+/* ─── Container global ─── */
+.main .block-container {
+  max-width: 900px !important;
+  margin: auto !important;
+  padding: 2rem 1rem !important;
+}
+
+/* ─── Logo + Titre (login & onglets) ─── */
+.logo-title {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin: 2rem 0 !important;
+}
+.logo-title img {
+  width: 80px !important;
+  margin-bottom: 1rem !important;
+}
+.logo-title h1 {
+  font-size: 2.5rem !important;
+  margin: 0 !important;
+}
+
+/* ─── Formulaire de login centré & compact ─── */
+form[aria-label="login_form"] {
+  max-width: 350px !important;
+  margin: 2rem auto !important;
+  padding: 1.5rem !important;
+  border: 1px solid #ddd !important;
+  border-radius: 8px !important;
+  background-color: #fafafa !important;
+}
+
+/* ─── Onglets : centrage et espacement ─── */
+.stTabs [role="tablist"] {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* ─── Style des onglets ─── */
+.stTabs [role="tab"] {
+  border: 2px solid red !important;
+  border-radius: 8px !important;
+  padding: 0.6rem 1.2rem !important;
+  background-color: #fff !important;
+  color: black !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.stTabs [role="tab"][aria-selected="true"] {
+  background-color: red !important;
+  color: white !important;
+}
+
+/* ─── Centrage du contenu des modules ─── */
+.module-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* ─── Agrandissement des textes ─── */
+h2, h3, .stMetricValue, .stMarkdown p {
+  font-size: 1.3rem !important;
+}
+
+/* ─── Centrage des tableaux / AgGrid ─── */
+.stDataFrameContainer, .ag-theme-streamlit {
+  width: 100% !important;
+  text-align: center !important;
+}
+/* ─── Agrandissement du texte dans les boutons ─── */
+div.stButton > button,
+div.stDownloadButton > button {
+  font-size: 1.3rem !important;   /* ajustez la taille au besoin */
+  padding: 0.8rem 1.2rem !important;
+}
