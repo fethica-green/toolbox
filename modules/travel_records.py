@@ -1,63 +1,20 @@
-# modules/travel_records.py
-
 import streamlit as st
 import pandas as pd
-from datetime import date
-from db import get_connection
+from db import init_db
 
 def render():
-    """
-    Module Travel Records
-    - 📥 Enregistrer le retour et le coût final d’une mission
-    - 📋 Consulter l’historique des retours
-    """
     st.header("🗄️ Travel Records")
 
-    conn = get_connection()
-    cursor = conn.cursor()
+    # Utilisez la BDD quand vous serez prêts
+    # conn = init_db()
+    # df = pd.read_sql("SELECT * FROM records ORDER BY date DESC", conn)
 
-    tab_record, tab_view = st.tabs(["📥 Record Travel", "📋 View Records"])
+    # Pour l’instant, données fictives
+    df = pd.DataFrame([
+        {"ID": 1, "Voyageur": "Alice Dupont",    "Destination": "NYC", "Date": "2025-01-15", "Statut": "Approuvé"},
+        {"ID": 2, "Voyageur": "Bob Martin",      "Destination": "PAR", "Date": "2025-02-03", "Statut": "Vérifié"},
+        {"ID": 3, "Voyageur": "Charlie Laurent", "Destination": "TOK", "Date": "2025-03-20", "Statut": "En attente"},
+        {"ID": 4, "Voyageur": "Dana Smith",      "Destination": "BRU", "Date": "2025-04-05", "Statut": "Approuvé"},
+    ])
 
-    # --- Enregistrement d’un retour de mission ---
-    with tab_record:
-        st.subheader("Record Travel Return")
-        with st.form("record_form"):
-            auth_id             = st.number_input(
-                "Travel Authorization ID", min_value=1, step=1,
-                help="ID de la TA créée dans l’onglet Travel Authorization"
-            )
-            final_fare          = st.number_input(
-                "Final Fare (€)", min_value=0.0, format="%.2f"
-            )
-            actual_return_date  = st.date_input(
-                "Actual Return Date", date.today()
-            )
-            submitted = st.form_submit_button("Submit Record")
-            if submitted:
-                cursor.execute(
-                    """
-                    INSERT INTO travel_records
-                        (authorization_id, final_fare, actual_return_date)
-                    VALUES (?, ?, ?)
-                    """,
-                    (
-                        auth_id,
-                        final_fare,
-                        actual_return_date.isoformat()
-                    )
-                )
-                conn.commit()
-                st.success("✅ Travel record saved.")
-
-    # --- Consultation des retours de mission ---
-    with tab_view:
-        st.subheader("All Travel Records")
-        df = pd.read_sql(
-            "SELECT * FROM travel_records ORDER BY actual_return_date DESC", conn
-        )
-        if df.empty:
-            st.info("No travel records yet.")
-        else:
-            # Format des dates pour l’affichage
-            df["actual_return_date"] = pd.to_datetime(df["actual_return_date"]).dt.date
-            st.dataframe(df, use_container_width=True)
+    st.dataframe(df)
